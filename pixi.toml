@@ -20,6 +20,9 @@ conda = ">=25.0.0"
 snakemake-minimal = ">=8.29.0"
 cffconvert = ">=2.0.0"
 clio-tools = ">=2025.03.03"
+geopandas = ">=1.0.1,<2"
+ipykernel = ">=6.29.5,<7"
+pyarrow = ">=19.0.1,<20"
 
 [pypi-dependencies]
 mkdocs-mermaid2-plugin = ">=1.2.1"

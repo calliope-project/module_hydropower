@@ -1,0 +1,7 @@
+name: shell
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - geopandas=1.0.1
+  - pyarrow=19.0.1

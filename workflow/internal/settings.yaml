@@ -2,4 +2,5 @@
 resources:
   automatic:
     # Links for automatically downloaded files
-    dummy_readme: "https://raw.githubusercontent.com/calliope-project/clio/refs/heads/main/README.md"
+    HydroBASINS: https://data.hydrosheds.org/file/hydrobasins/standard/hybas_{continent}_lev01-12_v1c.zip
+continent_codes: ["af", "ar", "as", "au", "eu", "gr", "na", "sa", "si"]
