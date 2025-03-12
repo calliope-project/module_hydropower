@@ -9,11 +9,27 @@ if TYPE_CHECKING:
 
 SHP_ZIP_PATH = "hybas_{continent}_lev{level}_v1c.shp"
 
+# ---
+# Taken from Euro-Calliope (MIT licensed)
+# https://github.com/calliope-project/euro-calliope/blob/c48f0c40f0f984772c484aa154002c68d027a7c6/scripts/hydro/preprocess_basins.py
+def _buffer_if_necessary(shape):
+    """Fix the basins shapes which are invalid.
+
+    Following the advice given here:
+    https://github.com/Toblerity/Shapely/issues/344
+    """
+    if not shape.is_valid:
+        shape = shape.buffer(0.0)
+    assert shape.is_valid
+    return shape
+# ---
+
 
 def extract_basin_pfafstetter_level(zip_file, continent, level, parquet_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""
     inner_path = SHP_ZIP_PATH.format(continent=continent, level=level)
     gdf = gpd.read_file(f"{zip_file}!{inner_path}")
+    gdf["geometry"] = gdf["geometry"].map(_buffer_if_necessary)
     gdf.to_parquet(parquet_file)
 
 

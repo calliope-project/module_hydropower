@@ -23,6 +23,8 @@ clio-tools = ">=2025.03.03"
 geopandas = ">=1.0.1,<2"
 ipykernel = ">=6.29.5,<7"
 pyarrow = ">=19.0.1,<20"
+pycountry = ">=24.6.1,<25"
+numpy = ">=2.2.3,<3"
 
 [pypi-dependencies]
 mkdocs-mermaid2-plugin = ">=1.2.1"
