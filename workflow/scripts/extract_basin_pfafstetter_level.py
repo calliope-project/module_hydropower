@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 SHP_ZIP_PATH = "hybas_{continent}_lev{level}_v1c.shp"
 
+
 # ---
 # Taken from Euro-Calliope (MIT licensed)
 # https://github.com/calliope-project/euro-calliope/blob/c48f0c40f0f984772c484aa154002c68d027a7c6/scripts/hydro/preprocess_basins.py
@@ -22,6 +23,8 @@ def _buffer_if_necessary(shape):
         shape = shape.buffer(0.0)
     assert shape.is_valid
     return shape
+
+
 # ---
 
 

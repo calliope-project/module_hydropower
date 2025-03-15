@@ -1,2 +1,9 @@
 # A minimal example of how to configure this module
 pfafstetter_level: "06"
+powerplants:
+  basin_adjustment:
+    buffer_radius: 500
+    max_dropped: 5
+crs:
+  projected: "epsg:3857"
+  geographic: "epsg:4326"

@@ -16,7 +16,9 @@ def combine_basins(continent_files, global_file):
     assert len(set(continent_crs)) == 1
 
     combined = pd.concat(continents)
+    combined = combined.reset_index(drop=True)
     combined.crs = continent_crs[0]
+
     combined.to_parquet(global_file)
 
 
