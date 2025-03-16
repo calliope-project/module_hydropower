@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     snakemake: Any
 
 
-def adjust_powerplant_location(
+def powerplants_adjust_location(
     powerplants_path: Path,
     basins_path: Path,
     geographic_crs: str,
@@ -46,13 +46,16 @@ def adjust_powerplant_location(
     powerplants = GeoDataFrame[schema.Powerplants](powerplants)
     basins = gpd.read_parquet(basins_path)
 
+    powerplants = powerplants.to_crs(geographic_crs)
+    basins = basins.to_crs(geographic_crs)
+    outside = powerplants.apply(
+        lambda x: not basins.contains(x.geometry).any(), axis="columns"
+    )
+
     # Identify and fix powerplants outside of bounds
     # Distance-based operations should use a projected CRS
     powerplants = powerplants.to_crs(projected_crs)
     basins = basins.to_crs(projected_crs)
-    outside = powerplants.apply(
-        lambda x: not basins.contains(x.geometry).any(), axis="columns"
-    )
     for index, data in powerplants[outside].iterrows():
         point = data["geometry"]
         distances = basins.distance(point)
@@ -77,7 +80,7 @@ def adjust_powerplant_location(
 
 
 if __name__ == "__main__":
-    adjust_powerplant_location(
+    powerplants_adjust_location(
         powerplants_path=snakemake.input.powerplants,
         basins_path=snakemake.input.basins,
         geographic_crs=snakemake.params.geographic_crs,

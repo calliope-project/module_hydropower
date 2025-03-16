@@ -1,5 +1,8 @@
 # A minimal example of how to configure this module
 pfafstetter_level: "06"
+dates:
+  start: "2015-01-01"
+  end: "2015-01-15"
 powerplants:
   basin_adjustment:
     buffer_radius: 500

@@ -20,7 +20,7 @@ with open(workflow.source_path("internal/settings.yaml"), "r") as f:
 
 # Add all your includes here.
 include: "rules/downloads.smk"
-include: "rules/hydrobasins.smk"
+include: "rules/basins.smk"
 include: "rules/powerplants.smk"
 
 

@@ -1,5 +1,6 @@
 """Schemas for user given resources and module results."""
 
+import pandera as pan
 from pandera import DataFrameModel, Field
 from pandera.typing import Series
 from pandera.typing.geopandas import GeoSeries
@@ -16,13 +17,13 @@ class Powerplants(DataFrameModel):
     geometry: GeoSeries
 
 
-# shapes_schema = pan.DataFrameSchema(
-#     {
-#         "shape_id": pan.Column(str, unique=True),
-#         "country_id": pan.Column(str),
-#         "class": pan.Column(str, pan.Check.isin(["land"])),
-#         "geometry": pan.Column("geometry"),
-#     },
-#     coerce=True,
-#     strict=False,
-# )
+shapes_schema = pan.DataFrameSchema(
+    {
+        "shape_id": pan.Column(str, unique=True),
+        "country_id": pan.Column(str),
+        "class": pan.Column(str, pan.Check.isin(["land"])),
+        "geometry": pan.Column("geometry"),
+    },
+    coerce=True,
+    strict=False,
+)

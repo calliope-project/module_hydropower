@@ -11,7 +11,7 @@ SHP_ZIP_PATH = "hybas_{continent}_lev{level}_v1c.shp"
 
 
 # ---
-# Taken from Euro-Calliope (MIT licensed)
+# Taken from Euro-Calliope (MIT licensed)s
 # https://github.com/calliope-project/euro-calliope/blob/c48f0c40f0f984772c484aa154002c68d027a7c6/scripts/hydro/preprocess_basins.py
 def _buffer_if_necessary(shape):
     """Fix the basins shapes which are invalid.
@@ -23,12 +23,10 @@ def _buffer_if_necessary(shape):
         shape = shape.buffer(0.0)
     assert shape.is_valid
     return shape
-
-
 # ---
 
 
-def extract_basin_pfafstetter_level(zip_file, continent, level, parquet_file):
+def basins_extract_pfafstetter_level(zip_file, continent, level, parquet_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""
     inner_path = SHP_ZIP_PATH.format(continent=continent, level=level)
     gdf = gpd.read_file(f"{zip_file}!{inner_path}")
@@ -37,7 +35,7 @@ def extract_basin_pfafstetter_level(zip_file, continent, level, parquet_file):
 
 
 if __name__ == "__main__":
-    extract_basin_pfafstetter_level(
+    basins_extract_pfafstetter_level(
         zip_file=snakemake.input.zip_file,
         continent=snakemake.params.continent,
         level=snakemake.params.level,

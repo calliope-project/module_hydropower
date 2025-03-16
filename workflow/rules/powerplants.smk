@@ -1,6 +1,6 @@
 """Rules for processing powerstations."""
 
-rule adjust_powerstation_location:
+rule powerplants_adjust_location:
     message:
         "Adjusting hydro powerplant location to the nearest basin within buffer radius {params.buffer_radius}."
     params:
@@ -13,5 +13,7 @@ rule adjust_powerstation_location:
         basins = "results/hydrobasin_global.parquet"
     output:
         adjusted_powerplants = "results/adjusted_powerplants.parquet"
+    conda:
+        "../envs/default.yaml"
     script:
-        "../scripts/adjust_powerplant_location.py"
+        "../scripts/powerplants_adjust_location.py"
