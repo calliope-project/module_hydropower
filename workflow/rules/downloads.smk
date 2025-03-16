@@ -16,7 +16,7 @@ rule download_basin:
 rule download_cutout:
     message: "Downloading runoff cutout from {params.start_date} to {params.end_date}."
     params:
-        geographic_crs = config["crs"]["geographic"],
+        era5_crs = internal["era5_crs"],
         start_date = config["dates"]["start"],
         end_date = config["dates"]["end"]
     input:
@@ -26,4 +26,4 @@ rule download_cutout:
     conda:
         "../envs/default.yaml"
     script:
-        "../scripts/runoff_cutout.py"
+        "../scripts/download_cutout.py"

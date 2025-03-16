@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+import _schema as schema
 import atlite
 import geopandas as gpd
 
@@ -28,15 +29,14 @@ def powerplants_get_inflow(
         cutout_file (Path): atlite cutout fitting the user shape.
         inflow_file (Path): resulting water inflow per powerplant.
     """
-    shapes = gpd.read_parquet(shapes_file)
-    powerplants = gpd.read_parquet(powerplants_file)
+    shapes = schema.shapes_schema(gpd.read_parquet(shapes_file))
+    powerplants = schema.powerplants_schema(gpd.read_parquet(powerplants_file))
     basins = gpd.read_parquet(basins_file)
     cutout = atlite.Cutout(path=cutout_file)
+    era5_crs = cutout.crs
 
     # atlite does not support CRS conversion, adapt data to it instead
-    era5_crs = cutout.crs
     assert era5_crs.is_geographic
-
     shapes = shapes.to_crs(era5_crs)
     powerplants = powerplants.to_crs(era5_crs)
     basins = basins.to_crs(era5_crs)

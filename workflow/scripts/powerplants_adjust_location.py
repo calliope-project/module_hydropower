@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING, Any
 
 import _schema as schema
 import geopandas as gpd
-from pandera.typing.geopandas import GeoDataFrame
 from pyproj import CRS
 
 if TYPE_CHECKING:
@@ -42,8 +41,7 @@ def powerplants_adjust_location(
     assert CRS(geographic_crs).is_geographic
 
     # Read and validate input files
-    powerplants = gpd.read_parquet(powerplants_path)
-    powerplants = GeoDataFrame[schema.Powerplants](powerplants)
+    powerplants = schema.powerplants_schema(gpd.read_parquet(powerplants_path))
     basins = gpd.read_parquet(basins_path)
 
     powerplants = powerplants.to_crs(geographic_crs)
