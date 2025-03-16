@@ -17,3 +17,19 @@ rule powerplants_adjust_location:
         "../envs/default.yaml"
     script:
         "../scripts/powerplants_adjust_location.py"
+
+
+rule powerplants_get_inflow:
+    message:
+        "Calculating hydro powerplant inflow."
+    input:
+        shapes = "resources/user/shapes.parquet",
+        powerplants = "results/adjusted_powerplants.parquet",
+        basins = "results/hydrobasin_global.parquet",
+        cutout = "resources/automatic/cutout.nc"
+    output:
+        inflow = "results/inflow.nc"
+    conda:
+        "../envs/default.yaml"
+    script:
+        "../scripts/powerplants_get_inflow.py"
