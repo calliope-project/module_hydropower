@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 INFLOW_TYPES = ["hydro_run_of_river", "hydro_dam"]
 
 
-def powerplants_get_inflow(
+def powerplants_get_inflow_m3(
     shapes_file: Path,
     powerplants_file: Path,
     basins_file: Path,
@@ -68,7 +68,7 @@ def powerplants_get_inflow(
 
 
 if __name__ == "__main__":
-    powerplants_get_inflow(
+    powerplants_get_inflow_m3(
         shapes_file=snakemake.input.shapes,
         powerplants_file=snakemake.input.powerplants,
         basins_file=snakemake.input.basins,

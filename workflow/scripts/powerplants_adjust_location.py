@@ -12,12 +12,11 @@ if TYPE_CHECKING:
 
 
 def powerplants_adjust_location(
-    powerplants_path: Path,
     basins_path: Path,
-    geographic_crs: str,
-    projected_crs: str,
-    buffer_radius: float,
-    max_dropped: int,
+    powerplants_path: Path,
+    shapes_path: Path,
+    crs: dict[str, str],
+    basin_adjustment: dict[str, int],
     adjusted_powerplants_path: Path,
 ):
     """Adjust powerplants to their closest basin.
@@ -25,36 +24,55 @@ def powerplants_adjust_location(
     Mismatched stations outside of the buffer radius will be dropped.
 
     Args:
-        powerplants_path (Path): user inputted powerplant data.
         basins_path (Path): merged global basins.
-        geographic_crs (str): geographic crs (e.g., EPSG:4326).
-        projected_crs (str): projected crs to use for distance-based operations (e.g., EPSG:3857).
-        buffer_radius (float): maximum distance allowed for the adjustment. Matches the unit of the projected CRS.
-        max_dropped (int): maximum allowed number of stations to drop.
+        powerplants_path (Path): user inputted powerplant data.
+        shapes_path (Path): user inputted shapes.
+        crs (dict[str, str]): geographic and projected CRS codes to use for operations.
+        basin_adjustment (dict[str, int]): settings to use during adjustment operation.
         adjusted_powerplants_path (Path): location to place the ajusted powerplant dataset.
 
     Raises:
         ValueError: dropped powerplants outside of bounds exceeded the configured maximum.
     """
     # Check the correctness of the requested crs
-    assert CRS(projected_crs).is_projected
-    assert CRS(geographic_crs).is_geographic
+    assert CRS(crs["projected"]).is_projected
+    assert CRS(crs["geographic"]).is_geographic
 
     # Read and validate input files
-    powerplants = schema.powerplants_schema(gpd.read_parquet(powerplants_path))
     basins = gpd.read_parquet(basins_path)
+    powerplants = gpd.read_parquet(powerplants_path)
+    schema.powerplants_schema(powerplants)
+    shapes = gpd.read_parquet(shapes_path)
+    schema.shapes_schema(shapes)
 
-    powerplants = powerplants.to_crs(geographic_crs)
-    basins = basins.to_crs(geographic_crs)
-    outside = powerplants.apply(
-        lambda x: not basins.contains(x.geometry).any(), axis="columns"
-    )
+    # Coordinate-based operations must use a geographic CRS
+    basins = basins.to_crs(crs["geographic"])
+    powerplants = powerplants.to_crs(crs["geographic"])
+    shapes = shapes.to_crs(crs["geographic"])
 
-    # Identify and fix powerplants outside of bounds
+    # Identify powerplants outside of basins / shapes
+    outside_basins = powerplants[
+        powerplants.geometry.apply(lambda x: not basins.contains(x).any())
+    ]
+    outside_shapes = powerplants[
+        powerplants.geometry.apply(lambda x: not shapes.contains(x).any())
+    ]
+    total_outside = len(set(outside_basins.index) | set(outside_shapes.index))
+    max_outside = basin_adjustment["max_outside"]
+    if total_outside > max_outside:
+        raise ValueError(
+            f"Powerplants outside basins and/or shapes ({total_outside}) exceeds the maximum ({max_outside})."
+        )
+
     # Distance-based operations should use a projected CRS
-    powerplants = powerplants.to_crs(projected_crs)
-    basins = basins.to_crs(projected_crs)
-    for index, data in powerplants[outside].iterrows():
+    basins = basins.to_crs(crs["projected"])
+    powerplants = powerplants.to_crs(crs["projected"])
+    shapes = shapes.to_crs(crs["projected"])
+    buffer_radius = basin_adjustment["buffer_radius"]
+
+    # Shift powerplant location to the nearest basin if it is within the buffer
+    to_drop = set(outside_basins.index)
+    for index, data in outside_basins.iterrows():
         point = data["geometry"]
         distances = basins.distance(point)
         min_distance = distances.min()
@@ -64,26 +82,37 @@ def powerplants_adjust_location(
                 basins.loc[min_id, "geometry"]
             )
             powerplants.loc[index, "geometry"] = intersection.representative_point()
-            outside = outside.drop(index, axis="index")
+            to_drop.remove(index)
 
-    # Drop powerplants outside of basins
-    if len(powerplants[outside]) > max_dropped:
+    # Assign country / shape IDs to each adjusted plant if it is within the buffer
+    powerplants = powerplants.sjoin_nearest(
+        shapes[["country_id", "shape_id", "geometry"]],
+        how="left",
+        max_distance=buffer_radius,
+    )
+
+    # Powerplants outside the buffer will be dropped
+    to_drop |= set(powerplants[powerplants["shape_id"].isna()].index)
+    total_dropped = len(to_drop)
+    max_dropped = basin_adjustment["max_dropped"]
+    if total_dropped > max_dropped:
         raise ValueError(
-            f"Dropped powerplants ({len(outside)}) exceeds the configured maximum ({max_dropped})."
+            f"Dropped powerplants ({total_dropped}) exceeds the configured maximum of ({max_dropped})."
         )
-    powerplants = powerplants[~outside]
+    powerplants = powerplants.drop(to_drop, axis="index")
 
-    powerplants = powerplants.to_crs(geographic_crs)
+    # Re-validate and save
+    schema.powerplants_schema(powerplants)
+    powerplants = powerplants.to_crs(crs["geographic"])
     powerplants.to_parquet(adjusted_powerplants_path)
 
 
 if __name__ == "__main__":
     powerplants_adjust_location(
-        powerplants_path=snakemake.input.powerplants,
         basins_path=snakemake.input.basins,
-        geographic_crs=snakemake.params.geographic_crs,
-        projected_crs=snakemake.params.projected_crs,
-        buffer_radius=snakemake.params.buffer_radius,
-        max_dropped=snakemake.params.max_dropped,
+        powerplants_path=snakemake.input.powerplants,
+        shapes_path=snakemake.input.shapes,
+        crs=snakemake.params.crs,
+        basin_adjustment=snakemake.params.basin_adjustment,
         adjusted_powerplants_path=snakemake.output.adjusted_powerplants,
     )

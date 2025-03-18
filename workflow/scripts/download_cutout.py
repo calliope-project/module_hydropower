@@ -1,6 +1,5 @@
 """Get a cutout with runoff data."""
 
-from datetime import date
 from typing import TYPE_CHECKING, Any
 
 import atlite
