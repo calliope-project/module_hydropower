@@ -3,16 +3,17 @@
 
 rule basins_extract_pfafstetter_level:
     message:
-        "Unzipping HydroBASINS file for '{wildcards.continent}' at pfafstetter level '{params.level}'."
+        "Unzipping HydroBASINS file for '{wildcards.continent}' at Pfafstetter level '{params.level}'."
     params:
-        level=config["pfafstetter_level"],
+        level=lambda wc: wc.level,
         continent=lambda wc: wc.continent,
     input:
         zip_file="resources/automatic/hydrobasin_{continent}.zip",
     output:
-        parquet_file="resources/automatic/hydrobasin_{continent}.parquet",
+        parquet_file="resources/automatic/hydrobasin_{continent}_{level}.parquet",
     wildcard_constraints:
         continent="|".join(internal["continent_codes"]),
+        level="|".join(internal["pfafstetter_level_codes"])
     conda:
         "../envs/default.yaml"
     script:
@@ -21,14 +22,14 @@ rule basins_extract_pfafstetter_level:
 
 rule basins_combine_continents:
     message:
-        "Combine all HydroBASINS into a single dataset."
+        "Combine all HydroBASINS into a single dataset for Pfafstetter level '{wildcards.level}'."
     input:
         continent_files=expand(
-            "resources/automatic/hydrobasin_{continent}.parquet",
+            "resources/automatic/hydrobasin_{continent}_{{level}}.parquet",
             continent=internal["continent_codes"],
         ),
     output:
-        global_file="results/hydrobasin_global.parquet",
+        global_file="results/hydrobasin_global_{level}.parquet",
     conda:
         "../envs/default.yaml"
     script:

@@ -8,7 +8,7 @@ rule powerplants_adjust_location:
         crs=config["crs"],
         basin_adjustment=config["powerplants"]["basin_adjustment"],
     input:
-        basins="results/hydrobasin_global.parquet",
+        basins=f"results/hydrobasin_global_{config["pfafstetter_level"]}.parquet",
         powerplants="resources/user/powerplants.parquet",
         shapes="resources/user/shapes.parquet"
     output:
@@ -23,9 +23,9 @@ rule powerplants_get_inflow_m3:
     message:
         "Calculating hydro powerplant inflow in m3."
     input:
+        basins=f"results/hydrobasin_global_{config["pfafstetter_level"]}.parquet",
         shapes="resources/user/shapes.parquet",
         powerplants="results/adjusted_powerplants.parquet",
-        basins="results/hydrobasin_global.parquet",
         cutout="resources/automatic/cutout.nc",
     output:
         inflow="results/inflow_m3.nc",

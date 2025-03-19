@@ -3,8 +3,8 @@
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-import _schema as schema
 import geopandas as gpd
+from _schema import PowerplantSchema, ShapeSchema
 from pyproj import CRS
 
 if TYPE_CHECKING:
@@ -41,9 +41,9 @@ def powerplants_adjust_location(
     # Read and validate input files
     basins = gpd.read_parquet(basins_path)
     powerplants = gpd.read_parquet(powerplants_path)
-    schema.powerplants_schema(powerplants)
+    PowerplantSchema.validate(powerplants)
     shapes = gpd.read_parquet(shapes_path)
-    schema.shapes_schema(shapes)
+    ShapeSchema.validate(shapes)
 
     # Coordinate-based operations must use a geographic CRS
     basins = basins.to_crs(crs["geographic"])
@@ -102,8 +102,8 @@ def powerplants_adjust_location(
     powerplants = powerplants.drop(to_drop, axis="index")
 
     # Re-validate and save
-    schema.powerplants_schema(powerplants)
     powerplants = powerplants.to_crs(crs["geographic"])
+    PowerplantSchema.validate(powerplants)
     powerplants.to_parquet(adjusted_powerplants_path)
 
 

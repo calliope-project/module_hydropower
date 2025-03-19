@@ -6,7 +6,7 @@ years:
 powerplants:
   basin_adjustment:
     buffer_radius: 1000  # epsg:3857 is in meters, so 1 km
-    max_outside: 20
+    max_outside: 25
     max_dropped: 0
 crs:
   projected: "epsg:3857"

@@ -3,9 +3,9 @@
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-import _schema as schema
 import atlite
 import geopandas as gpd
+from _schema import PowerplantSchema, ShapeSchema
 
 if TYPE_CHECKING:
     snakemake: Any
@@ -29,9 +29,12 @@ def powerplants_get_inflow_m3(
         cutout_file (Path): atlite cutout fitting the user shape.
         inflow_file (Path): resulting water inflow per powerplant.
     """
-    shapes = schema.shapes_schema(gpd.read_parquet(shapes_file))
-    powerplants = schema.powerplants_schema(gpd.read_parquet(powerplants_file))
     basins = gpd.read_parquet(basins_file)
+    powerplants = gpd.read_parquet(powerplants_file)
+    PowerplantSchema.validate(powerplants)
+    shapes = gpd.read_parquet(shapes_file)
+    ShapeSchema.validate(shapes)
+
     cutout = atlite.Cutout(path=cutout_file)
     era5_crs = cutout.crs
 
