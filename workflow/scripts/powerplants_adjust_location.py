@@ -89,7 +89,7 @@ def powerplants_adjust_location(
         shapes[["country_id", "shape_id", "geometry"]],
         how="left",
         max_distance=buffer_radius,
-    )
+    ).drop("index_right", axis="columns")
 
     # Powerplants outside the buffer will be dropped
     to_drop |= set(powerplants[powerplants["shape_id"].isna()].index)

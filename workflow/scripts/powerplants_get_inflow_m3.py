@@ -10,9 +10,6 @@ from _schema import PowerplantSchema, ShapeSchema
 if TYPE_CHECKING:
     snakemake: Any
 
-INFLOW_TYPES = ["hydro_run_of_river", "hydro_dam"]
-
-
 def powerplants_get_inflow_m3(
     shapes_file: Path,
     powerplants_file: Path,
@@ -44,21 +41,14 @@ def powerplants_get_inflow_m3(
     powerplants = powerplants.to_crs(era5_crs)
     basins = basins.to_crs(era5_crs)
 
-    # Process only relevant powerplants
-    powerplants = powerplants[powerplants["powerplant_type"].isin(INFLOW_TYPES)]
-    within = powerplants.apply(
-        lambda x: shapes.contains(x.geometry).any(), axis="columns"
-    )
-    powerplants_within = powerplants[within].copy()
-
     # Re-format for atlite
-    powerplants_within["lon"] = powerplants_within.geometry.apply(lambda point: point.x)
-    powerplants_within["lat"] = powerplants_within.geometry.apply(lambda point: point.y)
-    powerplants_within = powerplants_within.drop("geometry", axis="columns").set_index(
+    powerplants["lon"] = powerplants.geometry.apply(lambda point: point.x)
+    powerplants["lat"] = powerplants.geometry.apply(lambda point: point.y)
+    powerplants = powerplants.drop("geometry", axis="columns").set_index(
         "powerplant_id"
     )
     # Calculate inflow
-    inflow = cutout.hydro(plants=powerplants_within, hydrobasins=basins)
+    inflow = cutout.hydro(plants=powerplants, hydrobasins=basins)
     inflow.attrs = {
         "units": "cubic_meter",
         "long_name": "Water inflow"
