@@ -4,7 +4,7 @@ from pandera import DataFrameModel, Field
 from pandera.typing import Series
 from pandera.typing.geopandas import GeoSeries
 
-POWERPLANT_TYPES = ["hydro_run_of_river", "hydro_dam", "hydro_pumped_storage"]
+POWERPLANT_TYPES = ["hydro_run_of_river", "hydro_dam"]
 
 
 class PowerplantSchema(DataFrameModel):
@@ -16,8 +16,6 @@ class PowerplantSchema(DataFrameModel):
     "Unique powerplant ID."
     net_generation_capacity_mw: Series[float] = Field(ge=0)
     "Net Generation Capacity in Megawatts."
-    net_pumping_capacity_mw: Series[float] = Field(nullable=True)
-    "Net pumping capacity in Megawatts."
     storage_capacity_mwh: Series[float] = Field(nullable=True)
     "Storage capacity in Megawatt hour."
     powerplant_type: Series[str] = Field(isin=POWERPLANT_TYPES)

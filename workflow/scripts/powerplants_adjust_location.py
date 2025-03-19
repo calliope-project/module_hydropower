@@ -72,8 +72,8 @@ def powerplants_adjust_location(
 
     # Shift powerplant location to the nearest basin if it is within the buffer
     to_drop = set(outside_basins.index)
-    for index, data in outside_basins.iterrows():
-        point = data["geometry"]
+    for index in outside_basins.index:
+        point = powerplants.loc[index, "geometry"]
         distances = basins.distance(point)
         min_distance = distances.min()
         min_id = distances.idxmin()
@@ -93,11 +93,11 @@ def powerplants_adjust_location(
 
     # Powerplants outside the buffer will be dropped
     to_drop |= set(powerplants[powerplants["shape_id"].isna()].index)
-    total_dropped = len(to_drop)
+    dropped_ids = powerplants.loc[list(to_drop), "powerplant_id"].to_list()
     max_dropped = basin_adjustment["max_dropped"]
-    if total_dropped > max_dropped:
+    if len(dropped_ids) > max_dropped:
         raise ValueError(
-            f"Dropped powerplants ({total_dropped}) exceeds the configured maximum of ({max_dropped})."
+            f"Dropped powerplants ({dropped_ids}) exceeds the configured maximum of ({max_dropped})."
         )
     powerplants = powerplants.drop(to_drop, axis="index")
 
