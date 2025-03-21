@@ -98,6 +98,10 @@ def powerplants_get_inflow_mwh(
     The inflow timeseries will be scaled utilising national generation data,
     with the aim of correcting its magnitude while retaining its dynamics.
 
+    General assumptions:
+        - Annual generation never exceeds installed capacity.
+        - Hydro dams have no spillage.
+
     Args:
         inflow_m3_file (str): Dataset with water inflow per-powerplant in m3.
         powerplants_file (str): Powerplants dataset (adjusted).
