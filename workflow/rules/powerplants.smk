@@ -48,3 +48,18 @@ rule powerplants_get_inflow_mwh:
         "../envs/default.yaml"
     script:
         "../scripts/powerplants_get_inflow_mwh.py"
+
+
+rule powerplants_get_cf_per_shape:
+    message:
+        "Calculating capacity factor timeseries per shape."
+    input:
+        powerplants="results/adjusted_powerplants.parquet",
+        inflow_mwh="results/powerplant_inflow_mwh.parquet"
+    output:
+        hydro_run_of_river="results/by_shape/run_of_river_cf.parquet",
+        hydro_dam="results/by_shape/hydro_dam_cf.parquet"
+    conda:
+        "../envs/default.yaml"
+    script:
+        "../scripts/powerplants_get_cf_per_shape.py"

@@ -31,8 +31,9 @@ def _water_inflow_m3_to_mwh(inflow_m3: pd.Series, annual_generation: float, cap:
     assert res.fun < 1, print(res)  # error smaller than 1 MWh
 
     return generation(res.x)
-# ---
 
+
+# ---
 
 def estimate_annual_powerplant_generation(
     powerplants: pd.DataFrame,
@@ -117,10 +118,7 @@ def powerplants_get_inflow_mwh(
         year_results.append(inflow_mwh_yr)
 
     inflow_mwh = pd.concat(year_results)
-    inflow_mwh.attrs = {
-        "long_name": "Energy inflow",
-        "units": "Megawatt hour"
-    }
+    inflow_mwh.attrs = {"long_name": "Energy inflow", "units": "Megawatt hour"}
     inflow_mwh.to_parquet(inflow_mwh_file)
 
 

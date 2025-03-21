@@ -23,9 +23,9 @@ def _buffer_if_necessary(shape):
         shape = shape.buffer(0.0)
     assert shape.is_valid
     return shape
+
+
 # ---
-
-
 def basins_extract_pfafstetter_level(zip_file, continent, level, parquet_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""
     inner_path = SHP_ZIP_PATH.format(continent=continent, level=level)

@@ -10,6 +10,7 @@ from _schema import PowerplantSchema, ShapeSchema
 if TYPE_CHECKING:
     snakemake: Any
 
+
 def powerplants_get_inflow_m3(
     shapes_file: Path,
     powerplants_file: Path,
@@ -51,10 +52,7 @@ def powerplants_get_inflow_m3(
     inflow = cutout.hydro(plants=powerplants, hydrobasins=basins)
     inflow = inflow.rename(plant="powerplant_id")
     inflow_df = inflow.to_pandas().T
-    inflow_df.attrs = {
-        "long_name": "Water inflow",
-        "units": "cubic_meter",
-    }
+    inflow_df.attrs = {"long_name": "Water inflow", "units": "cubic_meter"}
     inflow_df.to_parquet(inflow_file)
 
 
@@ -64,5 +62,5 @@ if __name__ == "__main__":
         powerplants_file=snakemake.input.powerplants,
         basins_file=snakemake.input.basins,
         cutout_file=snakemake.input.cutout,
-        inflow_file=snakemake.output.inflow
+        inflow_file=snakemake.output.inflow,
     )
