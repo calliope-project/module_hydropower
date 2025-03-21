@@ -1,4 +1,13 @@
 module_hydropower:
-  dummy_text: >-
-    Configuration values (like this one) are also external to the module!
-    This gives users a lot of flexibility in how they apply your methodology to solve their particular needs.
+  pfafstetter_level: "01"  # Use an extremely coarse basin resolution
+  years:
+    start: 2015
+    end: 2015
+  powerplants:
+    basin_adjustment:
+      buffer_radius: 400  # epsg:3857 is in meters, so 1 km
+      max_outside: 0
+      max_dropped: 0
+  crs:
+    projected: "epsg:3857"
+    geographic: "epsg:4326"

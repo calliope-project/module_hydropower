@@ -3,6 +3,71 @@ description: "Schema for user-provided configuration files."
 type: object
 additionalProperties: false
 properties:
-  dummy_text:
-    description: A template example. Should be deleted in real applications.
+  pfafstetter_level:
+    description: >
+      Defines the resolution of the hydro-basins dataset to use.
+      The higher the number, the higher the basins resolution.
     type: string
+  years:
+    description: Initial and final year to include in the data.
+    type: object
+    properties:
+      start:
+        type: integer
+        minimum: 0
+      end:
+        type: integer
+        minimum: 0
+    required:
+      - start
+      - end
+    additionalProperties: false  # Ensures no extra properties in "years"
+  powerplants:
+    description: Powerplant related settings.
+    type: object
+    properties:
+      basin_adjustment:
+        description: >
+          Powerplant location may not always match that of the basins or shape files.
+          In such cases, we adjust the powerplant's location to the nearest basin and shape,
+          as long as it is within a given buffer radius.
+        type: object
+        properties:
+          buffer_radius:
+            description: >
+              Radius of the buffer to use during basin adjustment.
+              The unit will match that of the projected CRS (i.e., meters for EPSG:3857).
+            type: integer
+            minimum: 0  # Ensures buffer_radius is not negative
+          max_outside:
+            description: >
+              Maximum number of powerplants allowed outside basins / shapes before the location adjustment.
+            type: integer
+            minimum: 0  # Ensures max_outside is not negative
+          max_dropped:
+            description: >
+              Maximum allowed powerplants to drop by the location adjustment algorithm.
+            type: integer
+            minimum: 0  # Ensures max_dropped is not negative
+        required:
+          - buffer_radius
+          - max_outside
+          - max_dropped
+        additionalProperties: false  # Ensures no extra properties in "basin_adjustment"
+    required:
+      - basin_adjustment
+    additionalProperties: false  # Ensures no extra properties in "powerplants"
+  crs:
+    description: Coordinate reference system settings.
+    type: object
+    properties:
+      projected:
+        description: CRS to use during operations related to distance / area.
+        type: string
+      geographic:
+        description: CRS to use during operations related to location.
+        type: string
+    required:
+      - projected
+      - geographic
+    additionalProperties: false  # Ensures no extra properties in "crs"

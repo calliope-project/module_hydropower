@@ -1,6 +1,5 @@
 [project]
 name = "module_hydropower"
-version = "0.1.0"
 authors = ["See AUTHORS file"]
 description = "A module to calculate hydropower generation timeseries for facilities around the globe."
 license = "Apache-2.0"
@@ -18,7 +17,6 @@ ruff = ">=0.9.9"
 snakefmt = ">=0.10.2"
 conda = ">=25.0.0"
 snakemake-minimal = ">=8.29.0"
-cffconvert = ">=2.0.0"
 clio-tools = ">=2025.03.03"
 geopandas = ">=1.0.1,<2"
 ipykernel = ">=6.29.5,<7"
