@@ -13,7 +13,7 @@ rule basins_extract_pfafstetter_level:
         parquet_file=temp("resources/automatic/hydrobasin_{continent}_{level}.parquet"),
     wildcard_constraints:
         continent="|".join(internal["continent_codes"]),
-        level="|".join(internal["pfafstetter_level_codes"])
+        level="|".join(internal["pfafstetter_level_codes"]),
     conda:
         "../envs/default.yaml"
     script:

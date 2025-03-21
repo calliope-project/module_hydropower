@@ -35,6 +35,7 @@ def _water_inflow_m3_to_mwh(inflow_m3: pd.Series, annual_generation: float, cap:
 
 # ---
 
+
 def estimate_annual_powerplant_generation(
     powerplants: pd.DataFrame,
     inflow_m3: pd.DataFrame,

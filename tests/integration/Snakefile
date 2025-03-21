@@ -1,7 +1,9 @@
 # Emulate a user configuring the module.
 configfile: workflow.source_path("./test_config.yaml")
 
+
 # The resources/ folder already includes files for a small generic test case using Montenegro
+
 
 # Import the module and configure it.
 # `snakefile:` specifies the module. It can use file paths and special github(...) / gitlab(...) markers
