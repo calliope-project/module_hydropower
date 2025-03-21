@@ -125,7 +125,7 @@ def powerplants_get_inflow_mwh(
 if __name__ == "__main__":
     powerplants_get_inflow_mwh(
         inflow_m3_file=snakemake.input.inflow_m3,
-        powerplants_file=snakemake.input.powerplants,
+        powerplants_file=snakemake.input.adjusted_powerplants,
         national_generation_file=snakemake.input.generation,
         inflow_mwh_file=snakemake.output.inflow_mwh,
     )

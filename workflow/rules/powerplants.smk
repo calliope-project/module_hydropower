@@ -8,7 +8,7 @@ rule powerplants_adjust_location:
         crs=config["crs"],
         basin_adjustment=config["powerplants"]["basin_adjustment"],
     input:
-        basins=f"results/hydrobasin_global_{config["pfafstetter_level"]}.parquet",
+        basins=ancient(f"resources/automatic/hydrobasin_global_{config["pfafstetter_level"]}.parquet"),
         powerplants="resources/user/powerplants.parquet",
         shapes="resources/user/shapes.parquet"
     output:
@@ -23,12 +23,12 @@ rule powerplants_get_inflow_m3:
     message:
         "Calculating hydro powerplant inflow in m3."
     input:
-        basins=f"results/hydrobasin_global_{config["pfafstetter_level"]}.parquet",
+        basins=ancient(f"resources/automatic/hydrobasin_global_{config["pfafstetter_level"]}.parquet"),
         shapes="resources/user/shapes.parquet",
-        powerplants="results/adjusted_powerplants.parquet",
-        cutout="resources/automatic/cutout.nc",
+        adjusted_powerplants="results/adjusted_powerplants.parquet",
+        cutout=ancient("resources/automatic/cutout.nc"),
     output:
-        inflow="results/powerplant_inflow_m3.parquet",
+        inflow="results/by_powerplant_id/inflow_m3.parquet",
     conda:
         "../envs/default.yaml"
     script:
@@ -39,11 +39,11 @@ rule powerplants_get_inflow_mwh:
     message:
         "Calculating powerplant generation in MWh and applying corrections using historical data."
     input:
-        inflow_m3="results/powerplant_inflow_m3.parquet",
-        powerplants="results/adjusted_powerplants.parquet",
+        inflow_m3="results/by_powerplant_id/inflow_m3.parquet",
+        adjusted_powerplants="results/adjusted_powerplants.parquet",
         generation="resources/user/national_generation.parquet"
     output:
-        inflow_mwh="results/powerplant_inflow_mwh.parquet"
+        inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet"
     conda:
         "../envs/default.yaml"
     script:
@@ -54,11 +54,11 @@ rule powerplants_get_cf_per_shape:
     message:
         "Calculating capacity factor timeseries per shape."
     input:
-        powerplants="results/adjusted_powerplants.parquet",
-        inflow_mwh="results/powerplant_inflow_mwh.parquet"
+        adjusted_powerplants="results/adjusted_powerplants.parquet",
+        inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet"
     output:
-        hydro_run_of_river="results/by_shape/run_of_river_cf.parquet",
-        hydro_dam="results/by_shape/hydro_dam_cf.parquet"
+        hydro_run_of_river="results/by_shape_id/run_of_river_cf.parquet",
+        hydro_dam="results/by_shape_id/hydro_dam_cf.parquet"
     conda:
         "../envs/default.yaml"
     script:

@@ -10,7 +10,7 @@ rule basins_extract_pfafstetter_level:
     input:
         zip_file="resources/automatic/hydrobasin_{continent}.zip",
     output:
-        parquet_file="resources/automatic/hydrobasin_{continent}_{level}.parquet",
+        parquet_file=temp("resources/automatic/hydrobasin_{continent}_{level}.parquet"),
     wildcard_constraints:
         continent="|".join(internal["continent_codes"]),
         level="|".join(internal["pfafstetter_level_codes"])
@@ -29,7 +29,7 @@ rule basins_combine_continents:
             continent=internal["continent_codes"],
         ),
     output:
-        global_file="results/hydrobasin_global_{level}.parquet",
+        global_file="resources/automatic/hydrobasin_global_{level}.parquet",
     conda:
         "../envs/default.yaml"
     script:

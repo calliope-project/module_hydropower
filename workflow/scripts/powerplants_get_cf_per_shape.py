@@ -70,7 +70,7 @@ def powerplants_get_cf_per_shape(
 
 if __name__ == "__main__":
     powerplants_get_cf_per_shape(
-        powerplants_file=snakemake.input.powerplants,
+        powerplants_file=snakemake.input.adjusted_powerplants,
         inflow_mwh_file=snakemake.input.inflow_mwh,
         output_paths=snakemake.output,
     )

@@ -59,7 +59,7 @@ def powerplants_get_inflow_m3(
 if __name__ == "__main__":
     powerplants_get_inflow_m3(
         shapes_file=snakemake.input.shapes,
-        powerplants_file=snakemake.input.powerplants,
+        powerplants_file=snakemake.input.adjusted_powerplants,
         basins_file=snakemake.input.basins,
         cutout_file=snakemake.input.cutout,
         inflow_file=snakemake.output.inflow,
