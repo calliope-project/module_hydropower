@@ -57,7 +57,7 @@ rule powerplants_get_cf_per_shape:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
         inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet"
     output:
-        hydro_run_of_river="results/by_shape_id/run_of_river_cf.parquet",
+        hydro_run_of_river="results/by_shape_id/hydro_run_of_river_cf.parquet",
         hydro_dam="results/by_shape_id/hydro_dam_cf.parquet"
     conda:
         "../envs/default.yaml"

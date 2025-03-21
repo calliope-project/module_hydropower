@@ -21,8 +21,9 @@ tmp/
 temp/
 
 # Show mutable folders, but do not commit resulting files
+**/logs/*
 **/resources/*
+**/results/*
 !resources/.gitkeep
 !tests/integration/resources/**
-**/results/*
 !results/.gitkeep

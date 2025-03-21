@@ -7,6 +7,7 @@ dependencies:
   - geopandas = 1.0.1
   - ipdb = 0.13.13
   - numpy = 2.2.4
+  - pandas = 2.2.3
   - pandera-geopandas = 0.23.1
   - pyarrow = 19.0.1
   - scipy = 1.15.2
