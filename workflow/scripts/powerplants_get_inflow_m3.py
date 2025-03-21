@@ -49,15 +49,13 @@ def powerplants_get_inflow_m3(
     )
     # Calculate inflow
     inflow = cutout.hydro(plants=powerplants, hydrobasins=basins)
-    inflow.attrs = {
-        "units": "cubic_meter",
-        "long_name": "Water inflow"
-    }
-    # Reformat and add useful metadata
     inflow = inflow.rename(plant="powerplant_id")
-    inflow.name = "inflow"
-
-    inflow.to_netcdf(inflow_file)
+    inflow_df = inflow.to_pandas().T
+    inflow_df.attrs = {
+        "long_name": "Water inflow",
+        "units": "cubic_meter",
+    }
+    inflow_df.to_parquet(inflow_file)
 
 
 if __name__ == "__main__":

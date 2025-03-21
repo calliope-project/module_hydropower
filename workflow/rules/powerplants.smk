@@ -28,28 +28,23 @@ rule powerplants_get_inflow_m3:
         powerplants="results/adjusted_powerplants.parquet",
         cutout="resources/automatic/cutout.nc",
     output:
-        inflow="results/inflow_m3.nc",
+        inflow="results/powerplant_inflow_m3.parquet",
     conda:
         "../envs/default.yaml"
     script:
         "../scripts/powerplants_get_inflow_m3.py"
 
 
-# rule powerplants_get_inflow_mwh:
-#     message:
-#         "Adjusting powerplant generation using historical data."
-#     params:
-#         max_capacity_factor=config["powerplants"]["max_capacity_factor"],
-#         start_year=config["years"]["start"],
-#         end_year=config["years"]["end"],
-#     input:
-#         inflow_m3="results/inflow_m3.nc",
-#         powerplants="results/adjusted_powerplants.parquet",
-#         shapes="resources/user/shapes.parquet",
-#         generation="resources/user/generation.parquet"
-#     output:
-#         inflow_mwh="results/inflow_mwh.nc"
-#     conda:
-#         "../envs/default.yaml"
-#     script:
-#         "../scripts/powerplants_get_inflow_mwh.py"
+rule powerplants_get_inflow_mwh:
+    message:
+        "Calculating powerplant generation in MWh and applying corrections using historical data."
+    input:
+        inflow_m3="results/powerplant_inflow_m3.parquet",
+        powerplants="results/adjusted_powerplants.parquet",
+        generation="resources/user/national_generation.parquet"
+    output:
+        inflow_mwh="results/powerplant_inflow_mwh.parquet"
+    conda:
+        "../envs/default.yaml"
+    script:
+        "../scripts/powerplants_get_inflow_mwh.py"

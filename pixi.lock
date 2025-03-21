@@ -275,7 +275,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/nlohmann_json-3.11.3-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nomkl-1.0-h5ca1d4c_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/numexpr-2.10.2-py312h6a710ac_100.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/numpy-2.2.3-py312h72c5963_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/numpy-2.2.4-py312h72c5963_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openjpeg-2.5.3-h5fbd93e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.4.1-h7b32b05_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/orc-2.0.3-h12ee42a_2.conda
@@ -395,7 +395,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/wcwidth-0.2.13-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/wrapt-1.17.2-py312h66e93f0_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/x265-3.5-h924138e_3.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.1.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.3.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xerces-c-3.2.5-h988505b_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xkeyboard-config-2.43-hb9d3cd8_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/xorg-libice-1.1.2-hb9d3cd8_0.conda
@@ -681,7 +681,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/networkx-3.4.2-pyh267e887_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/nlohmann_json-3.11.3-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/numexpr-2.10.2-py312hbbbb429_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/numpy-2.2.3-py312h7c1f314_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/numpy-2.2.4-py312h7c1f314_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/openjpeg-2.5.3-h8a3d83b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.4.1-h81ee809_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/orc-2.0.3-h0ff2369_2.conda
@@ -799,7 +799,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/wcwidth-0.2.13-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/wrapt-1.17.2-py312hea69d52_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/x265-3.5-hbc6ce65_3.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.1.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.3.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/xerces-c-3.2.5-h92fc2f4_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/xorg-libxau-1.0.12-h5505292_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/xorg-libxdmcp-1.1.5-hd74edd7_0.conda
@@ -1046,7 +1046,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/networkx-3.4.2-pyh267e887_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/nlohmann_json-3.11.3-he0c23c2_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/numexpr-2.10.2-mkl_py312h5e4250c_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/numpy-2.2.3-py312h3150e54_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/numpy-2.2.4-py312h3150e54_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/openjpeg-2.5.3-h4d64b90_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/openssl-3.4.1-ha4e3fda_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/orc-2.0.3-haf104fe_2.conda
@@ -1168,7 +1168,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/win_inet_pton-1.1.0-pyh7428d3b_8.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/wrapt-1.17.2-py312h4389bb4_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/x265-3.5-h2d74725_3.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.1.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.3.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/xerces-c-3.2.5-he0c23c2_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/xorg-libice-1.1.2-h0e40799_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/xorg-libsm-1.2.5-h0e40799_0.conda
@@ -4177,8 +4177,6 @@ packages:
   - numpy >=1.19,<3
   - python >=3.12,<3.13.0a0
   - python_abi 3.12.* *_cp312
-  arch: x86_64
-  platform: linux
   license: MIT
   license_family: MIT
   purls:
@@ -4199,8 +4197,6 @@ packages:
   - python >=3.12,<3.13.0a0
   - python >=3.12,<3.13.0a0 *_cpython
   - python_abi 3.12.* *_cp312
-  arch: arm64
-  platform: osx
   license: MIT
   license_family: MIT
   purls:
@@ -4221,8 +4217,6 @@ packages:
   - ucrt >=10.0.20348.0
   - vc >=14.2,<15
   - vc14_runtime >=14.29.30139
-  arch: x86_64
-  platform: win
   license: MIT
   license_family: MIT
   purls:
@@ -9462,9 +9456,9 @@ packages:
   - pkg:pypi/numexpr?source=hash-mapping
   size: 190065
   timestamp: 1732736910460
-- conda: https://conda.anaconda.org/conda-forge/linux-64/numpy-2.2.3-py312h72c5963_0.conda
-  sha256: e05f689807e11a11871b9072b7443d6f2bf2bae3871d5258d787c6e182a7eaec
-  md5: d117e16d71afa469ea26c3d6896291da
+- conda: https://conda.anaconda.org/conda-forge/linux-64/numpy-2.2.4-py312h72c5963_0.conda
+  sha256: 47b3b2ae21efb227db7410f2701291cf47d816fd96461bdede415d7d75d8a436
+  md5: 3f2871f111d8c0abd9c3150a8627507e
   depends:
   - __glibc >=2.17,<3.0.a0
   - libblas >=3.9.0,<4.0a0
@@ -9479,12 +9473,12 @@ packages:
   license: BSD-3-Clause
   license_family: BSD
   purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 8458232
-  timestamp: 1739426128240
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/numpy-2.2.3-py312h7c1f314_0.conda
-  sha256: f6d81177a944f15cb70533e11dfd37310bc6f51f4bbe891f60c6e9822cfe1cbe
-  md5: d2265734b798f3935561a0d30281a532
+  - pkg:pypi/numpy?source=compressed-mapping
+  size: 8424727
+  timestamp: 1742255434709
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/numpy-2.2.4-py312h7c1f314_0.conda
+  sha256: 68eafd2b7beca8467fe84a8a03767680be686d601a0771d3414c7019f3302ee0
+  md5: 001a57e8f4cc0c12841d341b94ef8787
   depends:
   - __osx >=11.0
   - libblas >=3.9.0,<4.0a0
@@ -9499,12 +9493,12 @@ packages:
   license: BSD-3-Clause
   license_family: BSD
   purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 6519967
-  timestamp: 1739426173329
-- conda: https://conda.anaconda.org/conda-forge/win-64/numpy-2.2.3-py312h3150e54_0.conda
-  sha256: 955717228863480fdf83ce8117e6fbcbdc6aec16c960ab98a67351240ca8a3d9
-  md5: 27009cd1c1ff60561fdd83fac84e3486
+  - pkg:pypi/numpy?source=compressed-mapping
+  size: 6559671
+  timestamp: 1742255398662
+- conda: https://conda.anaconda.org/conda-forge/win-64/numpy-2.2.4-py312h3150e54_0.conda
+  sha256: 477bd925070dd7122c3d2d8be57e06338f1e946c403a1044908aaf68a5e27cdf
+  md5: e668b8543944b4d80aaa9c904f3821ee
   depends:
   - libblas >=3.9.0,<4.0a0
   - libcblas >=3.9.0,<4.0a0
@@ -9519,9 +9513,9 @@ packages:
   license: BSD-3-Clause
   license_family: BSD
   purls:
-  - pkg:pypi/numpy?source=hash-mapping
-  size: 7128924
-  timestamp: 1739426632874
+  - pkg:pypi/numpy?source=compressed-mapping
+  size: 7058478
+  timestamp: 1742255793694
 - conda: https://conda.anaconda.org/conda-forge/linux-64/openjpeg-2.5.3-h5fbd93e_0.conda
   sha256: 5bee706ea5ba453ed7fd9da7da8380dd88b865c8d30b5aaec14d2b6dd32dbc39
   md5: 9e5816bc95d285c115a3ebc2f8563564
@@ -11678,6 +11672,8 @@ packages:
   - numpy >=1.23.5
   - python >=3.12,<3.13.0a0
   - python_abi 3.12.* *_cp312
+  arch: x86_64
+  platform: linux
   license: BSD-3-Clause
   license_family: BSD
   purls:
@@ -11701,6 +11697,8 @@ packages:
   - python >=3.12,<3.13.0a0
   - python >=3.12,<3.13.0a0 *_cpython
   - python_abi 3.12.* *_cp312
+  arch: arm64
+  platform: osx
   license: BSD-3-Clause
   license_family: BSD
   purls:
@@ -11722,6 +11720,8 @@ packages:
   - ucrt >=10.0.20348.0
   - vc >=14.2,<15
   - vc14_runtime >=14.29.30139
+  arch: x86_64
+  platform: win
   license: BSD-3-Clause
   license_family: BSD
   purls:
@@ -12707,41 +12707,40 @@ packages:
   purls: []
   size: 5517425
   timestamp: 1646611941216
-- conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.1.2-pyhd8ed1ab_0.conda
-  sha256: 0f59c2718573770b01d849e05a56a7fe1461f55bf7525c4df5552079c5c03427
-  md5: b8d9af89c48fa3359f05f3324809fcde
+- conda: https://conda.anaconda.org/conda-forge/noarch/xarray-2025.3.0-pyhd8ed1ab_0.conda
+  sha256: 2bd415ea2f71fe0458905923c4039f41107766377530301f2f95465f11f1b4d2
+  md5: 8ff602aae12466f334754064aa6d8aab
   depends:
   - numpy >=1.24
   - packaging >=23.2
   - pandas >=2.1
   - python >=3.10
   constrains:
-  - pint >=0.22
   - netcdf4 >=1.6.0
-  - cartopy >=0.22
-  - iris >=3.7
-  - h5py >=3.8
-  - nc-time-axis >=1.4
+  - cftime >=1.6
+  - pint >=0.22
   - sparse >=0.14
-  - bottleneck >=1.3
-  - scipy >=1.11
-  - numba >=0.57
-  - toolz >=0.12
-  - h5netcdf >=1.3
   - distributed >=2023.11
-  - dask-core >=2023.11
+  - hdf5 >=1.12
   - flox >=0.7
   - seaborn-base >=0.13
-  - zarr >=2.16
+  - dask-core >=2023.11
+  - h5py >=3.8
+  - nc-time-axis >=1.4
   - matplotlib-base >=3.8
-  - cftime >=1.6
-  - hdf5 >=1.12
+  - toolz >=0.12
+  - scipy >=1.11
+  - cartopy >=0.22
+  - numba >=0.57
+  - zarr >=2.16
+  - iris >=3.7
+  - h5netcdf >=1.3
+  - bottleneck >=1.3
   license: Apache-2.0
-  license_family: APACHE
   purls:
-  - pkg:pypi/xarray?source=hash-mapping
-  size: 837969
-  timestamp: 1738313762187
+  - pkg:pypi/xarray?source=compressed-mapping
+  size: 852028
+  timestamp: 1742448453517
 - conda: https://conda.anaconda.org/conda-forge/linux-64/xerces-c-3.2.5-h988505b_2.conda
   sha256: 339ab0ff05170a295e59133cd0fa9a9c4ba32b6941c8a2a73484cc13f81e248a
   md5: 9dda9667feba914e0e80b95b82f7402b

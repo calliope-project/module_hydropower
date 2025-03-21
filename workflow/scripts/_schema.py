@@ -1,7 +1,7 @@
 """Schemas for user given resources and module results."""
 
 from pandera import DataFrameModel, Field
-from pandera.typing import Series
+from pandera.typing import Index, Series
 from pandera.typing.geopandas import GeoSeries
 
 POWERPLANT_TYPES = ["hydro_run_of_river", "hydro_dam"]
@@ -22,6 +22,7 @@ class PowerplantSchema(DataFrameModel):
     "Type of hydropower plant."
     geometry: GeoSeries
     "Plant location (Point)."
+    index: Index[int] = Field(unique=True)
 
 
 class ShapeSchema(DataFrameModel):
@@ -37,9 +38,10 @@ class ShapeSchema(DataFrameModel):
     "Shape class. Only 'land' is accepted."
     geometry: GeoSeries
     "Shape polygon."
+    index: Index[int] = Field(unique=True)
 
 
-class HydroGenerationSchema(DataFrameModel):
+class NationalGenerationSchema(DataFrameModel):
     class Config:
         coerce = True
         strict = False
@@ -50,3 +52,4 @@ class HydroGenerationSchema(DataFrameModel):
     "Year of the data sample."
     generation_mwh: Series[float] = Field(ge=0)
     "Combined hydropower generation at the given year."
+    index: Index[int] = Field(unique=True)
