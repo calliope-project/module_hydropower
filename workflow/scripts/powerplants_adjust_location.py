@@ -29,7 +29,7 @@ def powerplants_adjust_location(
         shapes_path (Path): user inputted shapes.
         crs (dict[str, str]): geographic and projected CRS codes to use for operations.
         basin_adjustment (dict[str, int]): settings to use during adjustment operation.
-        adjusted_powerplants_path (Path): location to place the ajusted powerplant dataset.
+        adjusted_powerplants_path (Path): location to place the adjusted powerplant dataset.
 
     Raises:
         ValueError: dropped powerplants outside of bounds exceeded the configured maximum.

@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 def basins_combine_continents(continent_files, global_file):
-    """Extract a specific pfafstetter lavel from a HydroBASINS zip file."""
+    """Extract a specific pfafstetter level from a HydroBASINS zip file."""
     continents = [gpd.read_parquet(i) for i in continent_files]
     continent_crs = [i.crs for i in continents]
     assert len(set(continent_crs)) == 1

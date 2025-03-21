@@ -48,7 +48,7 @@ def estimate_annual_powerplant_generation(
     plants_by_id = powerplants.set_index("powerplant_id")
 
     # Re-scale capacity share to account for erroneous zero timesteps in the inflow data
-    # TODO: indentify the reasoning behind this
+    # TODO: identify the reasoning behind this
     scaling_factor = inflow_m3_yr.where(inflow_m3_yr > 1).count(
         axis="index"
     ) / inflow_m3_yr.count(axis="index")

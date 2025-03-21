@@ -39,7 +39,7 @@ def _get_capacity_factors_timeseries(
 
     if cf_timeseries.isna().any().any():
         ValueError(
-            f"Calucated capacity factor timeseries must not contain null values {tech}."
+            f"Calculated capacity factor timeseries must not contain null values {tech}."
         )
 
     cf_timeseries.attrs = {

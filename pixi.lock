@@ -11427,8 +11427,6 @@ packages:
   - python_abi 3.12.* *_cp312
   constrains:
   - __glibc >=2.17
-  arch: x86_64
-  platform: linux
   license: MIT
   license_family: MIT
   purls:
@@ -11445,8 +11443,6 @@ packages:
   - python_abi 3.12.* *_cp312
   constrains:
   - __osx >=11.0
-  arch: arm64
-  platform: osx
   license: MIT
   license_family: MIT
   purls:
@@ -11465,8 +11461,6 @@ packages:
   - vc14_runtime >=14.29.30139
   - ucrt >=10.0.20348.0
   - python_abi 3.12.* *_cp312
-  arch: x86_64
-  platform: win
   license: MIT
   license_family: MIT
   purls:
