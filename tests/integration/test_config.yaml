@@ -5,7 +5,7 @@ module_hydropower:
     end: 2015
   powerplants:
     basin_adjustment:
-      buffer_radius: 400  # epsg:3857 is in meters, so 1 km
+      buffer_radius: 400  # epsg:3857 is in meters
       max_outside: 0
       max_dropped: 0
   crs:
