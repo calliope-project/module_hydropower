@@ -2,7 +2,9 @@
 configfile: workflow.source_path("./test_config.yaml")
 
 
+
 # The resources/ folder already includes files for a small generic test case using Montenegro
+
 
 
 # Import the module and configure it.
@@ -16,6 +18,7 @@ module module_hydropower:
 
 # rename all module rules with a prefix, to avoid naming conflicts.
 use rule * from module_hydropower as module_hydropower_*
+
 
 
 # Request something from the module
