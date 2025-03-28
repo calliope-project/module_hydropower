@@ -11,7 +11,7 @@ repos:
       - id: end-of-file-fixer
       # Repo quality
       - id: check-added-large-files
-        args: [--enforce-all]
+        args: [--enforce-all --maxkb=600]
       - id: forbid-submodules
       - id: check-case-conflict
       - id: check-illegal-windows-names
@@ -40,7 +40,8 @@ repos:
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
-    - id: codespell
+      - id: codespell
+        files: .*\.(py|smk|md)$|^Snakefile$
 
 ci:  # https://pre-commit.ci/
   autoupdate_schedule: monthly
