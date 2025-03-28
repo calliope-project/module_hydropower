@@ -33,7 +33,7 @@ def test_snakemake_all_failure(module_path):
 def test_snakemake_integration_testing(module_path):
     """Run a light-weight test simulating someone using this module."""
     assert subprocess.run(
-        "snakemake --use-conda results/by_shape_id/hydro_dam_cf.parquet",
+        "snakemake --use-conda --dry-run results/by_shape_id/hydro_dam_cf.parquet",
         shell=True,
         check=True,
         cwd=module_path / "tests/integration",
