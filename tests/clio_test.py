@@ -22,6 +22,21 @@ def test_interface_file(module_path):
     assert ModuleInterface.from_yaml(module_path / "INTERFACE.yaml")
 
 
+@pytest.mark.parametrize(
+    "file",
+    [
+        "CITATION.cff",
+        "AUTHORS",
+        "INTERFACE.yaml",
+        "LICENSE",
+        "tests/integration/Snakefile",
+    ],
+)
+def test_standard_file_existance(module_path, file):
+    """Check that a minimal set of files used for clio automatic docs are present."""
+    assert Path(module_path / file).exists()
+
+
 def test_snakemake_all_failure(module_path):
     """The snakemake 'all' rule should return an error by default."""
     process = subprocess.run(
@@ -33,7 +48,7 @@ def test_snakemake_all_failure(module_path):
 def test_snakemake_integration_testing(module_path):
     """Run a light-weight test simulating someone using this module."""
     assert subprocess.run(
-        "snakemake --use-conda --dry-run results/by_shape_id/hydro_dam_cf.parquet",
+        "snakemake --use-conda --dry-run",
         shell=True,
         check=True,
         cwd=module_path / "tests/integration",

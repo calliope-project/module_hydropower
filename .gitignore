@@ -15,15 +15,12 @@ __pycache__
 .snakemake/
 gurobi.log
 
-### Notebooks and testing
+### Notebooks
 .ipynb_checkpoints
-tmp/
-temp/
 
 # Show mutable folders, but do not commit resulting files
-**/logs/*
-**/resources/*
-**/results/*
-!resources/.gitkeep
-!tests/integration/resources/**
+resources/
+!resources/user/.gitkeep
+!resources/automatic/.gitkeep
+results/
 !results/.gitkeep
