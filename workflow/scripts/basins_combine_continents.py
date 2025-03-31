@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
 
+
 def basins_combine_continents(continent_files, global_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""
     continents = [gpd.read_parquet(i) for i in continent_files]

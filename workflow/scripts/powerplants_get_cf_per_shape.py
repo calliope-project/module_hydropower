@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
 
+
 def _get_capacity_factors_timeseries(
     tech: str, powerplants: pd.DataFrame, inflow_mwh: pd.DataFrame
 ) -> pd.DataFrame:

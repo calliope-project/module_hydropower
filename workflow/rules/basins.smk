@@ -17,7 +17,7 @@ rule basins_extract_pfafstetter_level:
     conda:
         "../envs/default.yaml"
     log:
-        "logs/basins_extract_pfafstetter_level_{continent}_{level}.log"
+        "logs/basins_extract_pfafstetter_level_{continent}_{level}.log",
     script:
         "../scripts/basins_extract_pfafstetter_level.py"
 
@@ -35,6 +35,6 @@ rule basins_combine_continents:
     conda:
         "../envs/default.yaml"
     log:
-        "logs/basins_combine_continents_{level}.log"
+        "logs/basins_combine_continents_{level}.log",
     script:
         "../scripts/basins_combine_continents.py"

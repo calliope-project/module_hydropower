@@ -15,7 +15,7 @@ rule download_basin:
     conda:
         "../envs/shell.yaml"
     log:
-        "logs/download_basin_{continent}.log"
+        "logs/download_basin_{continent}.log",
     shell:
         "curl -sSLo {output} '{params.url}' "
 
@@ -34,6 +34,6 @@ rule download_cutout:
     conda:
         "../envs/default.yaml"
     log:
-        "logs/download_cutout.log"
+        "logs/download_cutout.log",
     script:
         "../scripts/download_cutout.py"

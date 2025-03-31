@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
 
+
 def powerplants_adjust_location(
     basins_path: Path,
     powerplants_path: Path,

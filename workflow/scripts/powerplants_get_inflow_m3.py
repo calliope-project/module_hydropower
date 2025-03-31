@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
 
+
 def powerplants_get_inflow_m3(
     shapes_file: Path,
     powerplants_file: Path,
