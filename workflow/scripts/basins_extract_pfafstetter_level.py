@@ -1,12 +1,13 @@
 """Transform from HydroBASINS zipped files to parquet."""
 
+import sys
 from typing import TYPE_CHECKING, Any
 
 import geopandas as gpd
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 SHP_ZIP_PATH = "hybas_{continent}_lev{level}_v1c.shp"
 
 

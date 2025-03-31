@@ -14,6 +14,8 @@ rule download_basin:
         continent="|".join(internal["continent_codes"]),
     conda:
         "../envs/shell.yaml"
+    log:
+        "logs/download_basin_{continent}.log"
     shell:
         "curl -sSLo {output} '{params.url}' "
 
@@ -31,5 +33,7 @@ rule download_cutout:
         cutout="resources/automatic/cutout.nc",
     conda:
         "../envs/default.yaml"
+    log:
+        "logs/download_cutout.log"
     script:
         "../scripts/download_cutout.py"

@@ -1,5 +1,6 @@
 """Get a cutout with runoff data."""
 
+import sys
 from typing import TYPE_CHECKING, Any
 
 import atlite
@@ -8,6 +9,7 @@ from pyproj import CRS
 
 if TYPE_CHECKING:
     snakemake: Any
+sys.stderr = open(snakemake.log[0], "w")
 
 
 def runoff_cutout(input_shapes, era5_crs, start_year, end_year, output_netcdf):

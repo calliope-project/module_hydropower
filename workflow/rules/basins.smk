@@ -16,6 +16,8 @@ rule basins_extract_pfafstetter_level:
         level="|".join(internal["pfafstetter_level_codes"]),
     conda:
         "../envs/default.yaml"
+    log:
+        "logs/basins_extract_pfafstetter_level_{continent}_{level}.log"
     script:
         "../scripts/basins_extract_pfafstetter_level.py"
 
@@ -32,5 +34,7 @@ rule basins_combine_continents:
         global_file="resources/automatic/hydrobasin_global_{level}.parquet",
     conda:
         "../envs/default.yaml"
+    log:
+        "logs/basins_combine_continents_{level}.log"
     script:
         "../scripts/basins_combine_continents.py"

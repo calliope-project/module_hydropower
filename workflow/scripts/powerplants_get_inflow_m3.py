@@ -1,5 +1,6 @@
 """Calculate the water inflow of relevant powerplants."""
 
+import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -9,7 +10,7 @@ from _schema import PowerplantSchema, ShapeSchema
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 
 def powerplants_get_inflow_m3(
     shapes_file: Path,

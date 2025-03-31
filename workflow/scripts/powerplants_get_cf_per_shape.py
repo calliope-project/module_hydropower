@@ -1,5 +1,6 @@
 """Capacity factor calculation for hydropower basin and run-of-river plants."""
 
+import sys
 from typing import TYPE_CHECKING, Any
 
 import geopandas as gpd
@@ -9,7 +10,7 @@ from _schema import POWERPLANT_TYPES, PowerplantSchema
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 
 def _get_capacity_factors_timeseries(
     tech: str, powerplants: pd.DataFrame, inflow_mwh: pd.DataFrame

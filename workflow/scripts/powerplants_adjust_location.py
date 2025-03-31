@@ -1,5 +1,6 @@
 """Adjustment of powerplant position to their nearest basin."""
 
+import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -9,7 +10,7 @@ from pyproj import CRS
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 
 def powerplants_adjust_location(
     basins_path: Path,

@@ -1,5 +1,6 @@
 """Combine all requested HydroBASIN datasets into one."""
 
+import sys
 from typing import TYPE_CHECKING, Any
 
 import geopandas as gpd
@@ -7,7 +8,7 @@ import pandas as pd
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 
 def basins_combine_continents(continent_files, global_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""

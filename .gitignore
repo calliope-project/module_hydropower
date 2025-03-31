@@ -19,8 +19,8 @@ gurobi.log
 .ipynb_checkpoints
 
 # Show mutable folders, but do not commit resulting files
-resources/
-!resources/user/.gitkeep
-!resources/automatic/.gitkeep
-results/
-!results/.gitkeep
+**/logs/*
+**/resources/*
+**/results/*
+!tests/integration/resources/automatic
+!tests/integration/resources/user

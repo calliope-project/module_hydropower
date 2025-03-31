@@ -1,5 +1,6 @@
 """Obtain magnitude-adjusted energy inflows for each powerplant in MWh."""
 
+import sys
 from calendar import isleap
 from typing import TYPE_CHECKING, Any
 
@@ -11,7 +12,7 @@ from scipy.optimize import minimize
 
 if TYPE_CHECKING:
     snakemake: Any
-
+sys.stderr = open(snakemake.log[0], "w")
 
 # ---
 # Taken from Euro-Calliope (MIT licensed)s

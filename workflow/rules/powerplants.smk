@@ -15,6 +15,8 @@ rule powerplants_adjust_location:
         shapes="resources/user/shapes.parquet",
     output:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
+    log:
+        "logs/powerplants_adjust_location.log"
     conda:
         "../envs/default.yaml"
     script:
@@ -33,6 +35,8 @@ rule powerplants_get_inflow_m3:
         cutout=ancient("resources/automatic/cutout.nc"),
     output:
         inflow="results/by_powerplant_id/inflow_m3.parquet",
+    log:
+        "logs/powerplants_get_inflow_m3.log"
     conda:
         "../envs/default.yaml"
     script:
@@ -48,6 +52,8 @@ rule powerplants_get_inflow_mwh:
         generation="resources/user/national_generation.parquet",
     output:
         inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet",
+    log:
+        "logs/powerplants_get_inflow_mwh.log"
     conda:
         "../envs/default.yaml"
     script:
@@ -63,6 +69,8 @@ rule powerplants_get_cf_per_shape:
     output:
         hydro_run_of_river="results/by_shape_id/hydro_run_of_river_cf.parquet",
         hydro_dam="results/by_shape_id/hydro_dam_cf.parquet",
+    log:
+        "logs/powerplants_get_cf_per_shape.log"
     conda:
         "../envs/default.yaml"
     script:
