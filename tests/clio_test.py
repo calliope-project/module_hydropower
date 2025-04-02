@@ -42,13 +42,13 @@ def test_snakemake_all_failure(module_path):
     process = subprocess.run(
         "snakemake", shell=True, cwd=module_path, capture_output=True
     )
-    assert "This workflow must be called as a snakemake module" in str(process.stderr)
+    assert "INVALID (missing locally)" in str(process.stderr)
 
 
 def test_snakemake_integration_testing(module_path):
     """Run a light-weight test simulating someone using this module."""
     assert subprocess.run(
-        "snakemake --use-conda --dry-run",
+        "snakemake --use-conda",
         shell=True,
         check=True,
         cwd=module_path / "tests/integration",
