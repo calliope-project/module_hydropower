@@ -18,8 +18,8 @@ rule powerplants_adjust_location:
         plot=report(
             "results/adjusted_powerplants.png",
             caption="../report/adjustment.rst",
-            category="Hydropower module"
-        )
+            category="Hydropower module",
+        ),
     log:
         "logs/powerplants_adjust_location.log",
     conda:

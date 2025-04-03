@@ -34,7 +34,7 @@ rule download_cutout:
         plot=report(
             "resources/automatic/cutout.png",
             caption="../report/cutout.rst",
-            category="Hydropower module"
+            category="Hydropower module",
         ),
     conda:
         "../envs/default.yaml"

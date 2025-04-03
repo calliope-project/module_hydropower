@@ -28,9 +28,7 @@ def _plot_adjustment(
     ax = shapes.plot(figsize=(10, 10), color="royalblue")
     after.plot(ax=ax, color="black", marker=".", markersize=8, label="Within")
     if not difference.empty:
-        difference.plot(
-            ax=ax, color="coral", marker=".", markersize=8, label="Dropped"
-        )
+        difference.plot(ax=ax, color="coral", marker=".", markersize=8, label="Dropped")
     ax.legend()
     ax.set_title("Powerplant adjustment")
     plt.savefig(plot_path, bbox_inches="tight")
