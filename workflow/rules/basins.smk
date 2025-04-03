@@ -32,7 +32,11 @@ rule basins_combine_continents:
         ),
     output:
         global_file="resources/automatic/hydrobasin_global_{level}.parquet",
-        plot=report("results/figs/hydrobasin_global_{level}.png", caption="../report/basins.rst", category="Global basins pfafstetter level {level}")
+        plot=report(
+            "results/figs/hydrobasin_global_{level}.png",
+            caption="../report/basins.rst",
+            category="Global basins pfafstetter level {level}",
+        ),
     conda:
         "../envs/default.yaml"
     log:

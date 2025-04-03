@@ -16,14 +16,21 @@ def setup_workflow(workflow_path, dest_path, case):
     shutil.copytree(workflow_path / "workflow", dest_path / "workflow")
     files_to_copy = [
         (f"tests/files/{case}/config.yaml", "config/config.yaml"),
-        (f"tests/files/{case}/powerplants.parquet", "resources/user/powerplants.parquet"),
+        (
+            f"tests/files/{case}/powerplants.parquet",
+            "resources/user/powerplants.parquet",
+        ),
         (f"tests/files/{case}/shapes.parquet", "resources/user/shapes.parquet"),
-        ("tests/files/national_generation.parquet", "resources/user/national_generation.parquet")
+        (
+            "tests/files/national_generation.parquet",
+            "resources/user/national_generation.parquet",
+        ),
     ]
     for src, dest in files_to_copy:
         dest_file = Path(dest_path / dest)
         dest_file.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(workflow_path / src, dest_file)
+
 
 @pytest.fixture(scope="module")
 def module_path():
@@ -40,9 +47,6 @@ def test_assorted_europe(module_path, tmp_path):
     setup_workflow(module_path, tmp_path, "assorted_europe")
     result_file = "results/adjusted_powerplants.parquet"
     subprocess.run(
-        f"snakemake --cores 4 {result_file}",
-        shell=True,
-        check=True,
-        cwd=tmp_path,
+        f"snakemake --cores 4 {result_file}", shell=True, check=True, cwd=tmp_path
     )
     assert Path(tmp_path / result_file).exists()

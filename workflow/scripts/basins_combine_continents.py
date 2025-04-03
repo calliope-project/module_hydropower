@@ -11,13 +11,15 @@ if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
 
+
 def _plot_combined_basins(global_file, path):
     combined = gpd.read_parquet(global_file)
     ax = combined.plot(figsize=(20, 12))
     ax.set_title("Global hydro basins")
     ax.set_xlabel("longitude")
     ax.set_ylabel("latitude")
-    plt.savefig(path, bbox_inches = "tight")
+    plt.savefig(path, bbox_inches="tight")
+
 
 def basins_combine_continents(continent_files, global_file):
     """Extract a specific pfafstetter level from a HydroBASINS zip file."""
@@ -38,6 +40,5 @@ if __name__ == "__main__":
         global_file=snakemake.output.global_file,
     )
     _plot_combined_basins(
-        global_file=snakemake.output.global_file,
-        path=snakemake.output.plot
+        global_file=snakemake.output.global_file, path=snakemake.output.plot
     )
