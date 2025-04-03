@@ -1,6 +1,8 @@
 # clio - Hydropower module
 
-A module to calculate hydropower generation timeseries for facilities around the globe.
+A module to calculate hydropower inflow timeseries for facilities around the globe. Based on Euro-Calliope methods.
+
+![Hydropower CFs assorted europe](./docs/hydro_dam_cf.png)
 
 A modular `snakemake` workflow built for [`clio`](https://clio.readthedocs.io/) data modules.
 

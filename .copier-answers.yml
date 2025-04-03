@@ -7,7 +7,7 @@ author_family_name: Ruiz Manuel
 author_given_name: Ivan
 github_org: calliope-project
 license: Apache-2.0
-module_description: A module to calculate hydropower generation timeseries for facilities
-    around the globe.
+module_description: A module to calculate hydropower inflow timeseries for facilities
+    around the globe. Based on Euro-Calliope methods.
 module_long_name: clio - Hydropower module
 module_short_name: module_hydropower
