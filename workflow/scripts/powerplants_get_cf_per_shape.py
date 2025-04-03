@@ -24,7 +24,7 @@ def _plot_cf_per_shape(cf_file: str, plant_type: str, fig_path: str):
             data[shape_id].plot(ax=axes[count])
             axes[count].set_title(shape_id)
             axes[count].set_xlabel("")
-        fig.suptitle(f"Capacity factors {plant_type}", fontsize="x-large")
+        fig.suptitle(f"Inflow capacity factors {plant_type}", fontsize="x-large")
         fig.tight_layout()
     else:
         # If no data, create an empty figure to avoid snakemake issues.
