@@ -17,7 +17,9 @@ sys.stderr = open(snakemake.log[0], "w")
 def _plot_cf_per_shape(cf_file: str, plant_type: str, fig_path: str):
     data = pd.read_parquet(cf_file)
     if not data.empty:
-        fig, axes = plt.subplots(len(data.columns), 1, figsize=(10, 1.5*len(data.columns)))
+        fig, axes = plt.subplots(
+            len(data.columns), 1, figsize=(10, 1.5 * len(data.columns))
+        )
         for count, shape_id in enumerate(data.columns):
             data[shape_id].plot(ax=axes[count])
             axes[count].set_title(shape_id)
@@ -81,9 +83,7 @@ def powerplants_get_cf_per_shape(
 
     PowerplantSchema.validate(powerplants)
 
-    cap_factors = _get_capacity_factors_timeseries(
-        plant_type, powerplants, inflow_mwh
-    )
+    cap_factors = _get_capacity_factors_timeseries(plant_type, powerplants, inflow_mwh)
     cap_factors.to_parquet(output_path)
 
 
@@ -98,7 +98,7 @@ def main():
     _plot_cf_per_shape(
         cf_file=snakemake.output.timeseries,
         plant_type=snakemake.wildcards.plant_type,
-        fig_path=snakemake.output.figure
+        fig_path=snakemake.output.figure,
     )
 
 
