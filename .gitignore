@@ -24,5 +24,6 @@ gurobi.log
 **/results/*
 **/temp/*
 **/tmp/*
-!tests/integration/resources/automatic
+!tests/integration/resources/automatic/cutout.nc
+!tests/integration/resources/automatic/hydrobasin_global_01.parquet
 !tests/integration/resources/user

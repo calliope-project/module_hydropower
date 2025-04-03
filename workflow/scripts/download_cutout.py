@@ -5,11 +5,21 @@ from typing import TYPE_CHECKING, Any
 
 import atlite
 import geopandas as gpd
+import matplotlib.pyplot as plt
 from pyproj import CRS
 
 if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
+
+
+def _plot_cutout(shapes_file: str, cutout_file: str, era5_crs: str, path: str):
+    cutout = atlite.Cutout(cutout_file)
+    shapes = gpd.read_parquet(shapes_file)
+    ax = shapes.to_crs(era5_crs).plot(figsize=(10, 10))
+    cutout.grid.plot(ax=ax, edgecolor="grey", color="None")
+    ax.set_title("ERA5 cutout")
+    plt.savefig(path, bbox_inches="tight")
 
 
 def runoff_cutout(input_shapes, era5_crs, start_year, end_year, output_netcdf):
@@ -39,4 +49,10 @@ if __name__ == "__main__":
         start_year=snakemake.params.start_year,
         end_year=snakemake.params.end_year,
         output_netcdf=snakemake.output.cutout,
+    )
+    _plot_cutout(
+        shapes_file=snakemake.input.shapes,
+        cutout_file=snakemake.output.cutout,
+        era5_crs=snakemake.params.era5_crs,
+        path=snakemake.output.plot,
     )

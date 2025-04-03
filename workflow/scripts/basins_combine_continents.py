@@ -12,10 +12,10 @@ if TYPE_CHECKING:
 sys.stderr = open(snakemake.log[0], "w")
 
 
-def _plot_combined_basins(global_file, path):
+def _plot_combined_basins(global_file, level, path):
     combined = gpd.read_parquet(global_file)
     ax = combined.plot(figsize=(20, 12))
-    ax.set_title("Global hydro basins")
+    ax.set_title(f"Global hydro basins at Pfafstetter level {level}")
     ax.set_xlabel("longitude")
     ax.set_ylabel("latitude")
     plt.savefig(path, bbox_inches="tight")
@@ -40,5 +40,7 @@ if __name__ == "__main__":
         global_file=snakemake.output.global_file,
     )
     _plot_combined_basins(
-        global_file=snakemake.output.global_file, path=snakemake.output.plot
+        global_file=snakemake.output.global_file,
+        level=snakemake.wildcards.level,
+        path=snakemake.output.plot,
     )

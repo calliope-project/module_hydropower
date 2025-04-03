@@ -31,6 +31,11 @@ rule download_cutout:
         shapes="resources/user/shapes.parquet",
     output:
         cutout="resources/automatic/cutout.nc",
+        plot=report(
+            "resources/automatic/cutout.png",
+            caption="../report/cutout.rst",
+            category="Hydropower module"
+        ),
     conda:
         "../envs/default.yaml"
     log:

@@ -15,6 +15,11 @@ rule powerplants_adjust_location:
         shapes="resources/user/shapes.parquet",
     output:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
+        plot=report(
+            "results/adjusted_powerplants.png",
+            caption="../report/adjustment.rst",
+            category="Hydropower module"
+        )
     log:
         "logs/powerplants_adjust_location.log",
     conda:
