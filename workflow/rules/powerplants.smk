@@ -67,15 +67,21 @@ rule powerplants_get_inflow_mwh:
 
 rule powerplants_get_cf_per_shape:
     message:
-        "Calculating capacity factor timeseries per shape."
+        "Calculating capacity factor timeseries per shape for '{wildcards.plant_type}'."
     input:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
         inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet",
     output:
-        hydro_run_of_river="results/by_shape_id/hydro_run_of_river_cf.parquet",
-        hydro_dam="results/by_shape_id/hydro_dam_cf.parquet",
+        timeseries="results/by_shape_id/{plant_type}_cf.parquet",
+        figure=report(
+            "results/by_shape_id/{plant_type}_cf.png",
+            caption="../report/cf_per_shape.rst",
+            category="Hydropower module",
+        ),
+    wildcard_constraints:
+        plant_type="|".join(["hydro_run_of_river", "hydro_dam"]),
     log:
-        "logs/powerplants_get_cf_per_shape.log",
+        "logs/powerplants_get_cf_per_shape_{plant_type}.log",
     conda:
         "../envs/default.yaml"
     script:

@@ -25,3 +25,4 @@ rule all:
     default_target: True
     input:
         "results/by_shape_id/hydro_dam_cf.parquet",
+        "results/by_shape_id/hydro_run_of_river_cf.parquet",
