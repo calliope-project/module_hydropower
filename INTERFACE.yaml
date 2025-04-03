@@ -1,20 +1,12 @@
 # Module Input-Output structure for automated doc. generation
 resources:
   user:
-    user_message.md: "Example file emulating external files requested from a user."
-  automatic:
-    dummy_readme.md: "Example file emulating downloads determined by internal settings."
+    national_generation.parquet: Annual hydropower generation statistics per country.
+    powerplants.parquet: Powerplant statistics.
+    shapes.parquet: Resolution shapes, used for capacity aggregation.
 results:
-  combined_text.md: "Example file emulating module results."
-
-# Wildcard example:
-# resources:
-#   user:
-#     shapes_{resolution}.geojson: region geometries.
-#   automatic:
-#     technology_data.parquet: dataset with technology characteristics.
-# results:
-#   '{resolution}/tech_capacity.parquet': description of output data.
-#   '{resolution}/results_image.png': description of output image.
-# wildcards:
-#   resolution: description of the wildcard’s purpose.
+  adjusted_powerplants.parquet: >
+    Powerplants statistics after geo-location correction, plus assigned shape_id and country_id.
+    Can be used to identify which powerplants were assigned to a given polygon.
+  by_shape_id/hydro_dam_cf.parquet: Capacity Factors for hydro dams, per shape.
+  by_shape_id/hydro_run_of_rover_cf.parquet: Capacity Factors for run of river plants, per shape.
