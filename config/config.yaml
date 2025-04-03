@@ -1,11 +1,11 @@
 # A minimal example of how to configure this module
-pfafstetter_level: "01"
+pfafstetter_level: "06"
 years:
   start: 2015
   end: 2015
 powerplants:
   basin_adjustment:
-    buffer_radius: 1000  # epsg:3857 is in meters, so 1 km
+    buffer_radius: 1000  # epsg:3857 is in meters
     max_outside: 25
     max_dropped: 0
 crs:

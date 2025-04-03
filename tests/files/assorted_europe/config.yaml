@@ -1,0 +1,12 @@
+pfafstetter_level: "05"
+years:
+  start: 2000
+  end: 2002
+powerplants:
+  basin_adjustment:
+    buffer_radius: 1000
+    max_outside: 50 # 49 plants are outside the shapes
+    max_dropped: 30 # 29 plants will be dropped
+crs:
+  projected: "epsg:3857"
+  geographic: "epsg:4326"
