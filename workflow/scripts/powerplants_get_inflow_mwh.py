@@ -43,7 +43,7 @@ def _estimate_bounded_powerplant_inflow(
     inflow_m3: pd.DataFrame,
     national_generation: pd.DataFrame,
     year: int,
-    capacity_factor_range: dict[str, float]
+    capacity_factor_range: dict[str, float],
 ) -> pd.DataFrame:
     """Obtain magnitude-corrected hydropower timeseries dataset for a given year.
 
@@ -66,7 +66,6 @@ def _estimate_bounded_powerplant_inflow(
         axis="index"
     ) / inflow_m3_yr.count(axis="index")
 
-
     national_cap_share_per_powerplant = (
         plants_by_id["net_generation_capacity_mw"]
         .multiply(scaling_factor, axis="index")
@@ -75,14 +74,16 @@ def _estimate_bounded_powerplant_inflow(
     )
 
     annual_national_generation = generation_yr.set_index("country_id")["generation_mwh"]
-    assert annual_national_generation.index.is_unique, f"Country data for {year} is not unique!"
+    assert annual_national_generation.index.is_unique, (
+        f"Country data for {year} is not unique!"
+    )
 
     annual_powerplant_mwh = plants_by_id.apply(
         lambda x: annual_national_generation[x.country_id]
         * national_cap_share_per_powerplant[x.name],
         axis="columns",
     )
-    hours_in_year = 366*24 if isleap(year) else 365*24
+    hours_in_year = 366 * 24 if isleap(year) else 365 * 24
     inflow_mwh_yr = pd.DataFrame(
         np.nan, index=inflow_m3_yr.index, columns=inflow_m3_yr.columns
     )
@@ -104,7 +105,9 @@ def _estimate_bounded_powerplant_inflow(
 
         # Convert values below the minimum range to zero, to avoid very small numbers
         zero_cutoff = plant_data["net_generation_capacity_mw"] * cf_range["min"]
-        inflow_mwh_yr[plant_id] = inflow_mwh_yr[plant_id].where(inflow_mwh_yr[plant_id] >= zero_cutoff, 0)
+        inflow_mwh_yr[plant_id] = inflow_mwh_yr[plant_id].where(
+            inflow_mwh_yr[plant_id] >= zero_cutoff, 0
+        )
 
     return inflow_mwh_yr
 
@@ -134,7 +137,7 @@ def powerplants_get_inflow_mwh(
     year_results = []
     for year in sorted(inflow_m3.index.year.unique()):
         inflow_mwh_yr = _estimate_bounded_powerplant_inflow(
-            powerplants, inflow_m3, generation, year, capacity_factor_range,
+            powerplants, inflow_m3, generation, year, capacity_factor_range
         )
         year_results.append(inflow_mwh_yr)
 

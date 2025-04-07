@@ -32,7 +32,7 @@ rule powerplants_get_inflow_m3:
     message:
         "Calculating hydro powerplant inflow in m3."
     params:
-        smoothing_hours = config["smoothing_hours"]
+        smoothing_hours=config["smoothing_hours"],
     input:
         basins=ancient(
             f"resources/automatic/hydrobasin_global_{config["pfafstetter_level"]}.parquet"
@@ -54,7 +54,7 @@ rule powerplants_get_inflow_mwh:
     message:
         "Calculating powerplant generation in MWh and applying corrections using historical data."
     params:
-        capacity_factor_range = internal["capacity_factor_range"]
+        capacity_factor_range=internal["capacity_factor_range"],
     input:
         inflow_m3="results/by_powerplant_id/inflow_m3.parquet",
         adjusted_powerplants="results/adjusted_powerplants.parquet",
