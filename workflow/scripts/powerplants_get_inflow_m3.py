@@ -18,6 +18,7 @@ def powerplants_get_inflow_m3(
     powerplants_file: Path,
     basins_file: Path,
     cutout_file: Path,
+    smoothing_hours: str,
     inflow_file: Path,
 ):
     """Get powerplant inflow using 'atlite'.
@@ -27,6 +28,7 @@ def powerplants_get_inflow_m3(
         powerplants_file (Path): adjusted powerplants file.
         basins_file (Path): global basins file.
         cutout_file (Path): atlite cutout fitting the user shape.
+        smoothing_hours (str): smoothing hours in the form '1h'.
         inflow_file (Path): resulting water inflow per powerplant.
     """
     basins = gpd.read_parquet(basins_file)
@@ -54,6 +56,11 @@ def powerplants_get_inflow_m3(
     inflow = cutout.hydro(plants=powerplants, hydrobasins=basins)
     inflow = inflow.rename(plant="powerplant_id")
     inflow_df = inflow.to_pandas().T
+
+    # Smoothen the timeseries to shave peaks and re-scale to the original magnitude
+    inflow_smooth = inflow_df.rolling(window=smoothing_hours, min_periods=1).mean()
+    inflow_df = (inflow_smooth / inflow_smooth.sum()) * inflow_df.sum()
+
     inflow_df.attrs = {"long_name": "Water inflow", "units": "cubic_meter"}
     inflow_df.to_parquet(inflow_file)
 
@@ -64,5 +71,6 @@ if __name__ == "__main__":
         powerplants_file=snakemake.input.adjusted_powerplants,
         basins_file=snakemake.input.basins,
         cutout_file=snakemake.input.cutout,
+        smoothing_hours=snakemake.params.smoothing_hours,
         inflow_file=snakemake.output.inflow,
     )

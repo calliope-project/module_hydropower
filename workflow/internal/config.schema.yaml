@@ -58,16 +58,24 @@ properties:
       - basin_adjustment
     additionalProperties: false  # Ensures no extra properties in "powerplants"
   crs:
-    description: Coordinate reference system settings.
+    description: Coordinate reference system settings in the form 'epsg:xxxx'.
     type: object
     properties:
       projected:
         description: CRS to use during operations related to distance / area.
         type: string
+        pattern: "^epsg:\\d{4,5}$"
       geographic:
         description: CRS to use during operations related to location.
         type: string
+        pattern: "^epsg:\\d{4,5}$"
     required:
       - projected
       - geographic
     additionalProperties: false  # Ensures no extra properties in "crs"
+  smoothing_hours:
+    description: >
+      Number of hours to use for smoothing the resulting timeseries in the form 'xh' (e.g., 168h, 24h).
+      '1h' will result in no smoothing.
+    type: string
+    pattern: ^(?!0h$)\d+h$

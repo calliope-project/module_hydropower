@@ -47,8 +47,15 @@ def test_snakemake_all_failure(module_path):
 
 def test_snakemake_integration_testing(module_path):
     """Run a light-weight test simulating someone using this module."""
+    files = [
+        "powerplants_get_inflow_m3=cutout",
+        "powerplants_get_inflow_m3=basins",
+        "powerplants_adjust_location=basins",
+    ]
+    command = " ".join([f"--consider-ancient {file}" for file in files])
+
     assert subprocess.run(
-        "snakemake --use-conda",
+        f"snakemake --use-conda {command}",
         shell=True,
         check=True,
         cwd=module_path / "tests/integration",

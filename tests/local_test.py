@@ -20,7 +20,7 @@ def setup_workflow(workflow_path: Path, dest_path: Path, case: str):
         shutil.rmtree(dest_path)
     shutil.copytree(workflow_path / "workflow", dest_path / "workflow")
     files_to_copy = [
-        (f"tests/files/{case}/config.yaml", "config/config.yaml"),
+        ("config/config.yaml", "config/config.yaml"),
         (
             f"tests/files/{case}/powerplants.parquet",
             "resources/user/powerplants.parquet",

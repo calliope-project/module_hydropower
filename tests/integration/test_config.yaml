@@ -11,3 +11,4 @@ module_hydropower:
   crs:
     projected: "epsg:3857"
     geographic: "epsg:4326"
+  smoothing_hours: "72h"
