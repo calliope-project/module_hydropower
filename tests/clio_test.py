@@ -22,18 +22,40 @@ def test_interface_file(module_path):
     assert ModuleInterface.from_yaml(module_path / "INTERFACE.yaml")
 
 
+@pytest.mark.parametrize(
+    "file",
+    [
+        "CITATION.cff",
+        "AUTHORS",
+        "INTERFACE.yaml",
+        "LICENSE",
+        "tests/integration/Snakefile",
+    ],
+)
+def test_standard_file_existance(module_path, file):
+    """Check that a minimal set of files used for clio automatic docs are present."""
+    assert Path(module_path / file).exists()
+
+
 def test_snakemake_all_failure(module_path):
     """The snakemake 'all' rule should return an error by default."""
     process = subprocess.run(
         "snakemake", shell=True, cwd=module_path, capture_output=True
     )
-    assert "This workflow must be called as a snakemake module" in str(process.stderr)
+    assert "INVALID (missing locally)" in str(process.stderr)
 
 
 def test_snakemake_integration_testing(module_path):
     """Run a light-weight test simulating someone using this module."""
+    files = [
+        "powerplants_get_inflow_m3=cutout",
+        "powerplants_get_inflow_m3=basins",
+        "powerplants_adjust_location=basins",
+    ]
+    command = " ".join([f"--consider-ancient {file}" for file in files])
+
     assert subprocess.run(
-        "snakemake --use-conda",
+        f"snakemake --use-conda {command}",
         shell=True,
         check=True,
         cwd=module_path / "tests/integration",
