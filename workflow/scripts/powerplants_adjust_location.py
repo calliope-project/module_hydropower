@@ -16,7 +16,6 @@ POWERPLANT_SCHEMA = io.from_yaml(snakemake.input.powerplant_schema)
 SHAPE_SCHEMA = io.from_yaml(snakemake.input.shape_schema)
 
 
-
 def _plot_adjustment(
     shapes_path: str,
     powerplants_path: str,

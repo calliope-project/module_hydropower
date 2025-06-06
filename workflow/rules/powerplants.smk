@@ -14,7 +14,7 @@ rule powerplants_adjust_location:
         powerplants="resources/user/powerplants.parquet",
         powerplant_schema=workflow.source_path("../internal/powerplant.schema.yaml"),
         shapes="resources/user/shapes.parquet",
-        shape_schema=workflow.source_path("../internal/shape.schema.yaml")
+        shape_schema=workflow.source_path("../internal/shape.schema.yaml"),
     output:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
         plot=report(
@@ -64,7 +64,9 @@ rule powerplants_get_inflow_mwh:
         adjusted_powerplants="results/adjusted_powerplants.parquet",
         powerplant_schema=workflow.source_path("../internal/powerplant.schema.yaml"),
         national_generation="resources/user/national_generation.parquet",
-        national_generation_schema=workflow.source_path("../internal/national_generation.schema.yaml"),
+        national_generation_schema=workflow.source_path(
+            "../internal/national_generation.schema.yaml"
+        ),
     output:
         inflow_mwh="results/by_powerplant_id/inflow_mwh.parquet",
     log:
