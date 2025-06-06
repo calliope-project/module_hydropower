@@ -7,11 +7,12 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from _schema import PowerplantSchema
+import pandera.io as io
 
 if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
+SCHEMA = io.from_yaml(snakemake.input.schema)
 
 
 def _plot_cf_per_shape(cf_file: str, plant_type: str, fig_path: str):
@@ -81,7 +82,7 @@ def powerplants_get_cf_per_shape(
     powerplants = gpd.read_parquet(powerplants_file)
     inflow_mwh = pd.read_parquet(inflow_mwh_file)
 
-    PowerplantSchema.validate(powerplants)
+    SCHEMA.validate(powerplants)
 
     cap_factors = _get_capacity_factors_timeseries(plant_type, powerplants, inflow_mwh)
     cap_factors.to_parquet(output_path)
