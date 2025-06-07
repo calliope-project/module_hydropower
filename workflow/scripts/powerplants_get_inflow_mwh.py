@@ -7,12 +7,14 @@ from typing import TYPE_CHECKING, Any
 import geopandas as gpd
 import numpy as np
 import pandas as pd
-from _schema import NationalGenerationSchema, PowerplantSchema
+import pandera.io as io
 from scipy.optimize import minimize
 
 if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
+NATIONAL_GENERATION_SCHEMA = io.from_yaml(snakemake.input.national_generation_schema)
+POWERPLANT_SCHEMA = io.from_yaml(snakemake.input.powerplant_schema)
 
 
 # ---
@@ -131,8 +133,8 @@ def powerplants_get_inflow_mwh(
     inflow_m3 = pd.read_parquet(inflow_m3_file)
     powerplants = gpd.read_parquet(powerplants_file)
     generation = pd.read_parquet(national_generation_file)
-    PowerplantSchema.validate(powerplants)
-    NationalGenerationSchema.validate(generation)
+    POWERPLANT_SCHEMA.validate(powerplants)
+    NATIONAL_GENERATION_SCHEMA.validate(generation)
 
     year_results = []
     for year in sorted(inflow_m3.index.year.unique()):
@@ -150,7 +152,7 @@ if __name__ == "__main__":
     powerplants_get_inflow_mwh(
         inflow_m3_file=snakemake.input.inflow_m3,
         powerplants_file=snakemake.input.adjusted_powerplants,
-        national_generation_file=snakemake.input.generation,
+        national_generation_file=snakemake.input.national_generation,
         capacity_factor_range=snakemake.params.capacity_factor_range,
         inflow_mwh_file=snakemake.output.inflow_mwh,
     )

@@ -6,11 +6,13 @@ from typing import TYPE_CHECKING, Any
 
 import atlite
 import geopandas as gpd
-from _schema import PowerplantSchema, ShapeSchema
+import pandera.io as io
 
 if TYPE_CHECKING:
     snakemake: Any
 sys.stderr = open(snakemake.log[0], "w")
+POWERPLANT_SCHEMA = io.from_yaml(snakemake.input.powerplant_schema)
+SHAPE_SCHEMA = io.from_yaml(snakemake.input.shape_schema)
 
 
 def powerplants_get_inflow_m3(
@@ -33,9 +35,9 @@ def powerplants_get_inflow_m3(
     """
     basins = gpd.read_parquet(basins_file)
     powerplants = gpd.read_parquet(powerplants_file)
-    PowerplantSchema.validate(powerplants)
+    POWERPLANT_SCHEMA.validate(powerplants)
     shapes = gpd.read_parquet(shapes_file)
-    ShapeSchema.validate(shapes)
+    SHAPE_SCHEMA.validate(shapes)
 
     cutout = atlite.Cutout(path=cutout_file)
     era5_crs = cutout.crs
